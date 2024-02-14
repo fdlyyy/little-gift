@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine's Day</title>
+<style>
+    body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    overflow: hidden; /* Menghilangkan scroll */
+  }
+  
+  .container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .content {
+    text-align: center;
+  }
+  
+  .content-wrapper {
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  }
+  
+  .image {
+    margin-right: 20px;
+  }
+  
+  .image img {
+    width: 300px; /* Sesuaikan dengan lebar gambar */
+    border-radius: 10px;
+  }
+  
+  .message {
+
+    background-color: #f0c0c0;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px; /* Lebar maksimum pesan */
+
+  }
+  
+  .dynamic-content {
+    margin-top: 20px;
+  }
+  
+  #particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+   
+  h1 {
+    color: #f0c0c0;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  a {
+    text-decoration: none;
+    color: #a87b7b;
+  }
+
+  button {
+    box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 10px;
+    text-decoration: none;
+  }
+</style>
+</head>
+<body>
+<canvas id="particles"></canvas>
+<div class="container">
+  <div class="content">
+    <h1>Happy Valentine's Day!</h1>
+    <div class="content-wrapper">
+      <div class="image">
+        <img src="img.jpeg" alt="Couple">
+      </div>
+      <div class="message">
+        <p>hi happy valentines day sorry I can't give you flowers, I can only give you this and yes maybe I failed a little as your girlfriend because on Valentine's day I didn't give you anything, while your brother gave you very beautiful flowers and yes sorry I didn't give you anything precious, but I have this</p>
+        <button><a href="flowers/flower.html">Here some little suprise for u</a></button>
+    </div>
+    </div>
+    <div class="dynamic-content">
+    </div>
+  </div>
+</div>
+<script language="javascript">
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const particles = [];
+const numberOfParticles = 500; // Ubah jumlah partikel di sini
+
+function createParticle() {
+  const x = Math.random() * canvas.width;
+  const y = Math.random() * canvas.height;
+  const radius = Math.random() * 2 + 1;
+  const color = Math.random() > 0.5 ? 'pink' : 'red'; // Warna bisa disesuaikan
+  particles.push({ x, y, radius, color });
+}
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach((particle) => {
+    ctx.beginPath();
+    ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+    ctx.fillStyle = particle.color;
+    ctx.fill();
+    // Update posisi partikel
+    particle.y += 1; // Kecepatan jatuh partikel
+    if (particle.y > canvas.height + particle.radius) {
+      // Reset posisi partikel saat mencapai bawah layar
+      particle.y = -particle.radius;
+    }
+  });
+}
+
+function update() {
+  draw();
+  requestAnimationFrame(update);
+}
+
+// Inisialisasi partikel
+for (let i = 0; i < numberOfParticles; i++) {
+  createParticle();
+}
+
+update();
+
+</script>
+</body>
+</html>
